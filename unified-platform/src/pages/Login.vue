@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="z-index: 100;margin-left: -253px;margin-top: -100px">
     <div class="hello" id="HelloWorld">
       <div id="mainPage">
         <img src="../assets/logo.png">
@@ -17,13 +17,16 @@
           <div id="loginContent">
             <div class="input_area">
               <!--v-model 双向绑定变量tele-->
-              <input type="text" class="uu" placeholder="账号（手机号/邮箱）" v-model="tele" οnkeydοwn="if(event.keyCode==13){this.form.code.focus();}">
+              <input type="text" id="account" class="uu" placeholder="账号（手机号/邮箱）" v-model="tele">
               <div class="code_area">
-                <input type="text" class="pp horizon" placeholder="密码" v-model="pcode"  οnkeydοwn="if(event.keyCode==13){loginSubmit(this.form)}">
+                <input type="password" id="password" class="pp horizon" placeholder="密码" v-model="pwd">
+              </div>
+              <div id="errorPwd" style="margin-left: 60px;margin-top: 10px;color: red;display: none">
+                密码错误，请重新输入
               </div>
             </div>
             <!--click绑定函数loginSubmit 与 myClose 实现登录与关闭登录框-->
-            <input name="Submit" class="login_button" type="button"  @click="loginSubmit();myClose(login)" v-focus @keyup.27="myClose(login)" value="登录">
+            <input name="Submit" class="login_button" type="button"  @click="loginSubmit()" v-focus @keyup.27="myClose(login)" value="登录">
           </div>
         </form>
       </div>
@@ -32,6 +35,9 @@
 </template>
 
 <script>
+// eslint-disable-next-line no-unused-vars
+import * as axios from 'babel-register'
+
 export default {
   name: 'Login',
   data () {
@@ -41,8 +47,7 @@ export default {
         backgroundImage: '../assets/background.jpg'
       },
       tele: '',
-      code: '',
-      pcode: '',
+      pwd: '',
       showLogin: false,
       isLogin: false
     }
@@ -68,13 +73,34 @@ export default {
       this.openDiv = divID
       var notClickDiv = document.getElementById('notClickDiv') // 获取id为notClickDiv的层
       notClickDiv.style.display = 'none'
+    },
+    loginSubmit () {
+      this.axios.post(
+        '/user/login',
+        {
+          'account': this.tele,
+          'password': this.pwd
+        }
+      ).then((response) => {
+        console.log(response.data)
+        // eslint-disable-next-line eqeqeq
+        if (response.data.code == 500)document.getElementById('errorPwd').style.display = 'block'
+        // eslint-disable-next-line eqeqeq
+        if (response.data.code == 200) {
+          document.getElementById('errorPwd').style.display = 'none'
+          this.$cookies.set('token', response.data.data)
+          this.$router.push('main')
+        }
+      }).catch((error) => {
+        console.log(error)
+      })
     }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style scoped>
 h1, h2 {
   color: white;
   font-weight: normal;
