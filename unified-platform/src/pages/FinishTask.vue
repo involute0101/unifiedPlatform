@@ -10,9 +10,6 @@
             <el-button slot="append" icon="el-icon-search"></el-button>
           </el-input>
         </el-col>
-        <el-col :span="4">
-          <el-button type="primary" @click="Myopen('publish')">发布任务</el-button>
-        </el-col>
       </el-row>
       <el-table :data="taskList" border stripe
                 :row-style="{height: '80px'}">
@@ -22,13 +19,13 @@
         </el-table-column>
         <el-table-column label="截止日期" prop="deadline"></el-table-column>
         <el-table-column label="文件" prop="files">
-<!--          <template slot-scope="scope">-->
-<!--            <a :href="scope.row.files" target="_blank" class="buttonText">{{scope.row.files}}</a>-->
-<!--          </template>-->
+          <!--          <template slot-scope="scope">-->
+          <!--            <a :href="scope.row.files" target="_blank" class="buttonText">{{scope.row.files}}</a>-->
+          <!--          </template>-->
         </el-table-column>
         <el-table-column label="状态" prop="state"></el-table-column>
         <el-table-column label="操作">
-          <el-button type="danger" style="color: red" plain>提交</el-button>
+          <el-button type="danger" style="color: red" plain>修改</el-button>
         </el-table-column>
       </el-table>
     </el-card>
@@ -64,7 +61,7 @@
 
 <script>
 export default {
-  name: 'Task',
+  name: 'FinishTask',
   data () {
     return {
       page: '1',
@@ -92,7 +89,7 @@ export default {
         headers: {'token': this.$cookies.get('token')}
       })
       instance.post(
-        '/task/undo',
+        '/task/finish',
         {
           'page': this.page,
           'size': this.size

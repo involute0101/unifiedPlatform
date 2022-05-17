@@ -6,7 +6,7 @@
           <img src="../assets/logo.png" alt="" height="25" width="25">
           <span style="margin-left: 10px">一体化平台</span>
         </div>
-        <el-button type="info" @click="quit">退出</el-button>
+        <el-button type="info" @click="loginOut">退出</el-button>
       </el-header>
     </div>
     <div class="manage_page fillcontain">
@@ -14,7 +14,11 @@
         <el-col :span="4"  style="min-height: 100%; background-color: #324057;">
           <el-menu :default-active="defaultActive" style="min-height: 100%;background-color: #e8eff5" theme="dark" router>
             <el-menu-item index="manage"><i class="el-icon-menu"></i>首页</el-menu-item>
-            <el-menu-item index="task"><i class="el-icon-document"></i><a >任务列表</a></el-menu-item>
+            <el-submenu index="2">
+              <template slot="title"><i class="el-icon-document"></i><a >任务列表</a></template>
+              <el-menu-item index="task">未完成任务</el-menu-item>
+              <el-menu-item index="finishTask">已完成任务</el-menu-item>
+            </el-submenu>
             <el-submenu index="3">
               <template slot="title"><i class="el-icon-plus"></i><a >添加数据</a></template>
               <el-menu-item index="addShop">添加商铺</el-menu-item>
@@ -55,6 +59,11 @@ export default {
   computed: {
     defaultActive: function () {
       return this.$route.path.replace('/', '')
+    }
+  },
+  methods: {
+    loginOut () {
+      this.$router.push('/')
     }
   }
 }
