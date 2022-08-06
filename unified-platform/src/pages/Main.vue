@@ -20,9 +20,9 @@
               <el-menu-item index="finishTask">已完成任务</el-menu-item>
             </el-submenu>
             <el-submenu index="3">
-              <template slot="title"><i class="el-icon-plus"></i><a >添加数据</a></template>
-              <el-menu-item index="addShop">添加商铺</el-menu-item>
-              <el-menu-item index="addGoods">添加商品</el-menu-item>
+              <template slot="title"><i class="el-icon-plus"></i><a >云空间</a></template>
+              <el-menu-item index="myRoom">我的空间</el-menu-item>
+              <el-menu-item index="shareRoom">共享空间</el-menu-item>
             </el-submenu>
             <el-submenu index="4">
               <template slot="title"><i class="el-icon-star-on"></i><a >图表</a></template>

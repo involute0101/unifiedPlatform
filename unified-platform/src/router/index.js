@@ -7,6 +7,8 @@ const main = r => require.ensure([], () => r(require('../pages/Main')), 'main')
 const task = r => require.ensure([], () => r(require('../pages/Task')), 'task')
 const manage = r => require.ensure([], () => r(require('../pages/Manage')), 'manage')
 const finishTask = r => require.ensure([], () => r(require('../pages/FinishTask')), 'finishTask')
+// eslint-disable-next-line no-unused-vars
+const myRoom = r => require.ensure([], () => r(require('../pages/MyRoom')), 'myRoom')
 
 Vue.use(Router)
 
@@ -30,6 +32,11 @@ const routes = [
     path: '/finishTask',
     name: 'finishTask',
     component: finishTask
+  },
+  {
+    path: '/myRoom',
+    name: 'myRoom',
+    component: myRoom
   }
 ]
 

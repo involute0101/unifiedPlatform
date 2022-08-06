@@ -89,6 +89,8 @@ export default {
         if (response.data.code == 200) {
           document.getElementById('errorPwd').style.display = 'none'
           this.$cookies.set('token', response.data.data)
+          this.$cookies.set('account', this.tele)
+          this.$cookies.set('curCloudSpacePath', '/')
           this.$router.push('main')
         }
       }).catch((error) => {

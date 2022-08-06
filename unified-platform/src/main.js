@@ -19,6 +19,7 @@ Vue.use(ElementUI) // 使用elementUI
 Vue.use(VueAxios, axios)
 
 axios.defaults.baseURL = 'http://www.involute.cn:8100/' // 接口ip:端口号
+// axios.defaults.baseURL = 'http://127.0.0.1:8100/' // 接口ip:端口号
 
 Vue.config.productionTip = false
 
